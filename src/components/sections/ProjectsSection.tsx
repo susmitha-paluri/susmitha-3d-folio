@@ -60,15 +60,15 @@ export const ProjectsSection = () => {
           </h2>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {projects.map((project, index) => (
             <ScrollReveal key={index}>
-              <div className="bg-card border border-border rounded-2xl p-6 card-3d neon-glow h-full flex flex-col">
-                <h3 className="text-2xl font-bold gradient-text mb-3">{project.title}</h3>
-                <p className="text-sm text-primary font-semibold mb-3">{project.stack}</p>
-                <p className="text-foreground mb-6 flex-grow">{project.summary}</p>
+              <div className="bg-card border border-border rounded-2xl p-5 sm:p-6 card-3d neon-glow h-full flex flex-col">
+                <h3 className="text-xl sm:text-2xl font-bold gradient-text mb-3">{project.title}</h3>
+                <p className="text-xs sm:text-sm text-primary font-semibold mb-3">{project.stack}</p>
+                <p className="text-sm sm:text-base text-foreground mb-6 flex-grow">{project.summary}</p>
                 
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <Button
                     variant="outline"
                     size="sm"
@@ -94,20 +94,20 @@ export const ProjectsSection = () => {
       </div>
 
       <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
-        <DialogContent className="max-w-3xl bg-card/95 backdrop-blur-sm border-border">
+        <DialogContent className="max-w-[95vw] sm:max-w-3xl bg-card/95 backdrop-blur-sm border-border max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-3xl gradient-text">{selectedProject?.title}</DialogTitle>
-            <DialogDescription className="text-lg text-primary font-semibold">
+            <DialogTitle className="text-2xl sm:text-3xl gradient-text">{selectedProject?.title}</DialogTitle>
+            <DialogDescription className="text-base sm:text-lg text-primary font-semibold">
               {selectedProject?.stack}
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4 mt-4">
-            <p className="text-foreground leading-relaxed">{selectedProject?.description}</p>
+            <p className="text-sm sm:text-base text-foreground leading-relaxed">{selectedProject?.description}</p>
             
             <Button
               onClick={() => window.open(selectedProject?.github, "_blank")}
-              className="bg-primary text-primary-foreground hover:bg-primary/90 neon-glow"
+              className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 neon-glow"
             >
               <Github className="w-5 h-5 mr-2" />
               View on GitHub

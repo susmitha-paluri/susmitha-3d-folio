@@ -63,13 +63,16 @@ export const Navigation = () => {
     >
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Logo/Brand */}
+          {/* Logo/Brand - Menu Icon */}
           <div className="flex-shrink-0">
             <button
-              onClick={() => scrollToSection("#hero")}
-              className="text-xl font-bold gradient-text neon-text hover:scale-105 transition-transform"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="flex flex-col gap-1.5 p-2 hover:scale-105 transition-transform group"
+              aria-label="Toggle menu"
             >
-              Portfolio
+              <span className="w-6 h-0.5 bg-primary rounded-full neon-glow group-hover:w-8 transition-all" />
+              <span className="w-6 h-0.5 bg-primary rounded-full neon-glow group-hover:w-8 transition-all" />
+              <span className="w-6 h-0.5 bg-primary rounded-full neon-glow group-hover:w-8 transition-all" />
             </button>
           </div>
 
