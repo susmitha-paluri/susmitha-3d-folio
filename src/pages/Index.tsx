@@ -1,4 +1,4 @@
-import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+import { Navigation } from "@/components/Navigation";
 import { ParticleBackground } from "@/components/ParticleBackground";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
@@ -14,7 +14,7 @@ const Index = () => {
   return (
     <div className="relative min-h-screen">
       <ParticleBackground />
-      <ThemeSwitcher />
+      <Navigation />
       
       <main className="relative z-10">
         <HeroSection />
