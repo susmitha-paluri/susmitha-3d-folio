@@ -23,7 +23,7 @@ export const ContactSection = () => {
   useEffect(() => {
     // Initialize EmailJS when component mounts
     if (window.emailjs) {
-      window.emailjs.init("YOUR_PUBLIC_KEY");
+      window.emailjs.init("p0YYsUD9R-kTzp-sW");
     }
   }, []);
 
@@ -43,7 +43,7 @@ export const ContactSection = () => {
         to_email: "psusmitha190@gmail.com"
       };
 
-      await window.emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", params);
+      await window.emailjs.send("service_4ry60pp", "template_sui60e4", params);
       
       toast.success("✅ Message Sent Successfully!", {
         description: "Thank you for reaching out. I'll get back to you soon!",
