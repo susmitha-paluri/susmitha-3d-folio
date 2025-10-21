@@ -23,7 +23,7 @@ export const ContactSection = () => {
   useEffect(() => {
     // Initialize EmailJS when component mounts
     if (window.emailjs) {
-      window.emailjs.init("p0YYsUD9R-kTzp-sW");
+      window.emailjs.init("I6jNCmfZwY-B-G58h");
     }
   }, []);
 
@@ -43,7 +43,7 @@ export const ContactSection = () => {
         to_email: "psusmitha190@gmail.com"
       };
 
-      await window.emailjs.send("service_4ry60pp", "template_sui60e4", params);
+      await window.emailjs.send("service_yth52we", "template_0i7d5dm", params);
       
       toast.success("✅ Message Sent Successfully!", {
         description: "Thank you for reaching out. I'll get back to you soon!",
