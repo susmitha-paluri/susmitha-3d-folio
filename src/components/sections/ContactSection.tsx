@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,19 +6,58 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Github, Linkedin } from "lucide-react";
 import { toast } from "sonner";
 
+declare global {
+  interface Window {
+    emailjs: any;
+  }
+}
+
 export const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+  const [isSending, setIsSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    // Initialize EmailJS when component mounts
+    if (window.emailjs) {
+      window.emailjs.init("YOUR_PUBLIC_KEY");
+    }
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Message Sent Successfully!", {
-      description: "Thank you for reaching out. I'll get back to you soon!",
-    });
-    setFormData({ name: "", email: "", message: "" });
+    setIsSending(true);
+
+    try {
+      if (!window.emailjs) {
+        throw new Error("EmailJS not loaded");
+      }
+
+      const params = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_email: "psusmitha190@gmail.com"
+      };
+
+      await window.emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", params);
+      
+      toast.success("✅ Message Sent Successfully!", {
+        description: "Thank you for reaching out. I'll get back to you soon!",
+      });
+      
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      toast.error("❌ Failed to send message", {
+        description: "Please try again or contact me directly via email.",
+      });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -151,9 +190,10 @@ export const ContactSection = () => {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 neon-glow"
+                  disabled={isSending}
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 neon-glow disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {isSending ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </div>
