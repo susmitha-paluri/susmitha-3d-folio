@@ -2,7 +2,8 @@ import { Download, ArrowDown, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Instagram } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpg";
-import codechefIcon from "@/assets/codechef.png";
+import codechefIcon from "@/assets/codechef-icon.png";
+import portswiggerIcon from "@/assets/portswigger-icon.png";
 
 const socialLinks = [
   { icon: Linkedin, url: "https://www.linkedin.com/in/susmitha-paluri", label: "LinkedIn", type: "lucide" },
@@ -20,7 +21,7 @@ const socialLinks = [
     type: "image"
   },
   {
-    iconUrl: "https://avatars.githubusercontent.com/u/1180132?s=200&v=4",
+    iconUrl: portswiggerIcon,
     url: "https://portswigger.net/web-security/dashboard",
     label: "PortSwigger",
     type: "image"
