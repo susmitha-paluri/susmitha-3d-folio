@@ -81,11 +81,6 @@ export const AboutSection = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-              {[1, 2, 3, 4].map(i => <div key={i} className="aspect-square rounded-lg overflow-hidden border-2 border-primary/30 hover:border-primary transition-colors">
-                  
-                </div>)}
-            </div>
 
             <div className="flex justify-center mt-8">
               <Button size="lg" onClick={downloadResume} className="bg-primary text-primary-foreground hover:bg-primary/90 neon-glow">
