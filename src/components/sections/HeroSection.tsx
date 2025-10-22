@@ -73,7 +73,7 @@ export const HeroSection = () => {
         </div>
 
         <h1 className="text-6xl md:text-8xl font-bold mb-4 gradient-text neon-text">
-          Paluri Susmitha
+          Susmitha Paluri
         </h1>
         
         <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-4xl mx-auto">
