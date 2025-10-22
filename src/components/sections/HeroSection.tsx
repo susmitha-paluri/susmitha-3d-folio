@@ -15,13 +15,13 @@ const socialLinks = [
     type: "image"
   },
   {
-    iconUrl: codechefIcon,
+    iconUrl: portswiggerIcon,
     url: "https://www.codechef.com/users/happy_ace_39",
     label: "CodeChef",
     type: "image"
   },
   {
-    iconUrl: portswiggerIcon,
+    iconUrl: codechefIcon,
     url: "https://portswigger.net/web-security/dashboard",
     label: "PortSwigger",
     type: "image"
