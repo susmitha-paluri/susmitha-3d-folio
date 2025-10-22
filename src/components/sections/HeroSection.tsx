@@ -2,44 +2,30 @@ import { Download, ArrowDown, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Instagram } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpg";
+import codechefIcon from "@/assets/codechef.png";
 
 const socialLinks = [
-  { icon: Linkedin, url: "https://www.linkedin.com/in/susmitha-paluri", label: "LinkedIn" },
-  { icon: Github, url: "https://github.com/susmitha-paluri", label: "GitHub" },
+  { icon: Linkedin, url: "https://www.linkedin.com/in/susmitha-paluri", label: "LinkedIn", type: "lucide" },
+  { icon: Github, url: "https://github.com/susmitha-paluri", label: "GitHub", type: "lucide" },
   { 
-    icon: function GeeksForGeeks() {
-      return (
-        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M9.33 9.33L7 12l2.33 2.67-1.16 1.16L5 12l3.17-3.83 1.16 1.16zm5.34 0L17 12l-2.33 2.67 1.16 1.16L19 12l-3.17-3.83-1.16 1.16zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-        </svg>
-      );
-    },
+    iconUrl: "https://media.geeksforgeeks.org/gfg-gg-logo.svg",
     url: "https://www.geeksforgeeks.org/user/psusmite0xx/",
-    label: "GeeksforGeeks"
+    label: "GeeksforGeeks",
+    type: "image"
   },
   {
-    icon: function CodeChef() {
-      return (
-        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M11.219 7.095h1.378l6.078 9.485V7.095h1.329v10.364h-1.329l-6.127-9.56v9.56H11.22V7.095zm-8.55.001h1.675l3.118 8.617 3.117-8.617h1.675l-4.176 10.838h-.233L2.669 7.096z"/>
-        </svg>
-      );
-    },
+    iconUrl: codechefIcon,
     url: "https://www.codechef.com/users/happy_ace_39",
-    label: "CodeChef"
+    label: "CodeChef",
+    type: "image"
   },
   {
-    icon: function PortSwigger() {
-      return (
-        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.5 8.778c-.124 5.736-3.142 8.654-8.595 8.654h-.87l-1.578 4.743-2.363-.001 1.575-4.742h-.87c-1.297 0-1.933-.709-1.933-1.913 0-.247.034-.524.105-.831l1.806-7.366h2.363l-1.653 6.731c-.053.216-.079.408-.079.575 0 .437.203.656.609.656h.87l1.653-6.731 2.363-.001-1.653 6.731c-.053.216-.079.408-.079.575 0 .437.203.656.609.656h.87c3.865 0 5.771-1.946 5.865-5.836l2.36.001z"/>
-        </svg>
-      );
-    },
+    iconUrl: "https://avatars.githubusercontent.com/u/1180132?s=200&v=4",
     url: "https://portswigger.net/web-security/dashboard",
-    label: "PortSwigger"
+    label: "PortSwigger",
+    type: "image"
   },
-  { icon: Instagram, url: "https://www.instagram.com/susmitha_reddy_paluri?igsh=b3hzY2ttZTg3cGdy", label: "Instagram" },
+  { icon: Instagram, url: "https://www.instagram.com/susmitha_reddy_paluri?igsh=b3hzY2ttZTg3cGdy", label: "Instagram", type: "lucide" },
 ];
 
 export const HeroSection = () => {
@@ -111,17 +97,24 @@ export const HeroSection = () => {
         {/* Social Links */}
         <div className="flex gap-6 justify-center mb-16">
           {socialLinks.map((social, index) => {
-            const IconComponent = social.icon;
             return (
               <a
                 key={index}
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110 hover:-rotate-6 neon-glow"
+                className="w-[35px] h-[35px] rounded-lg bg-card border border-border flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-[0_0_20px_rgba(239,68,68,0.6)] hover:border-red-500 overflow-hidden p-1"
                 aria-label={social.label}
               >
-                <IconComponent className="w-5 h-5" />
+                {social.type === "image" ? (
+                  <img 
+                    src={social.iconUrl} 
+                    alt={social.label}
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <social.icon className="w-5 h-5" />
+                )}
               </a>
             );
           })}
