@@ -1,27 +1,17 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Download, User } from "lucide-react";
-
 export const AboutSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const downloadResume = () => {
     const link = document.createElement("a");
     link.href = "/Susmitha_Paluri_Resume.pdf";
     link.download = "Susmitha_Paluri_Resume.pdf";
     link.click();
   };
-
-  return (
-    <section id="about" className="relative py-20 px-6">
+  return <section id="about" className="relative py-20 px-6">
       <div className="container mx-auto max-w-6xl">
         <ScrollReveal>
           <h2 className="text-5xl md:text-6xl font-bold text-center mb-16 gradient-text neon-text">
@@ -41,11 +31,7 @@ export const AboutSection = () => {
             </div>
 
             <div className="flex gap-4 justify-center mt-8">
-              <Button
-                size="lg"
-                onClick={() => setIsModalOpen(true)}
-                className="bg-primary text-primary-foreground hover:bg-primary/90 neon-glow"
-              >
+              <Button size="lg" onClick={() => setIsModalOpen(true)} className="bg-primary text-primary-foreground hover:bg-primary/90 neon-glow">
                 See More About Me
               </Button>
             </div>
@@ -96,23 +82,13 @@ export const AboutSection = () => {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="aspect-square rounded-lg overflow-hidden border-2 border-primary/30 hover:border-primary transition-colors">
-                  <img
-                    src="/placeholder.svg"
-                    alt={`Gallery ${i}`}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                  />
-                </div>
-              ))}
+              {[1, 2, 3, 4].map(i => <div key={i} className="aspect-square rounded-lg overflow-hidden border-2 border-primary/30 hover:border-primary transition-colors">
+                  
+                </div>)}
             </div>
 
             <div className="flex justify-center mt-8">
-              <Button
-                size="lg"
-                onClick={downloadResume}
-                className="bg-primary text-primary-foreground hover:bg-primary/90 neon-glow"
-              >
+              <Button size="lg" onClick={downloadResume} className="bg-primary text-primary-foreground hover:bg-primary/90 neon-glow">
                 <Download className="mr-2 h-5 w-5" />
                 Download Resume
               </Button>
@@ -120,6 +96,5 @@ export const AboutSection = () => {
           </div>
         </DialogContent>
       </Dialog>
-    </section>
-  );
+    </section>;
 };
