@@ -1,22 +1,18 @@
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { Award } from "lucide-react";
+import certIot from "@/assets/cert-iot.jpeg";
+import certCloud1 from "@/assets/cert-cloud-1.jpeg";
+import certCloud2 from "@/assets/cert-cloud-2.jpeg";
+import certCloud3 from "@/assets/cert-cloud-3.jpeg";
+import certCip from "@/assets/cert-cip.jpeg";
+import certSaviynt from "@/assets/cert-saviynt.jpeg";
 
 const certificates = [
-  "Generative AI",
-  "IoT (Internet of Things)",
-  "Cybersecurity Fundamentals",
-  "Cloud Computing",
-  "Web Development",
-  "Java Programming",
-  "Full Stack Development",
-  "AI Basics",
-  "Data Analytics",
-  "DBMS (Database Management)",
-  "Python Programming",
-  "C Programming",
-  "Ethical Hacking",
-  "SQL",
-  "Problem-Solving Achievement",
+  { name: "Introduction to Internet of Things", image: certIot },
+  { name: "Google Cloud Computing Certifications", image: certCloud1 },
+  { name: "Google Cloud AI & Gen AI", image: certCloud2 },
+  { name: "Google Cloud Professional ML Engineer", image: certCloud3 },
+  { name: "Introduction to Critical Infrastructure Protection", image: certCip },
+  { name: "Saviynt Identity Security for AI Age", image: certSaviynt },
 ];
 
 export const CertificatesSection = () => {
@@ -29,15 +25,19 @@ export const CertificatesSection = () => {
           </h2>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {certificates.map((cert, index) => (
             <ScrollReveal key={index}>
-              <div className="bg-card border border-border rounded-xl sm:rounded-2xl overflow-hidden card-3d neon-glow h-full">
-                <div className="aspect-[4/3] bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center p-4 sm:p-6">
-                  <Award className="w-16 h-16 sm:w-20 sm:h-20 text-primary animate-float" />
+              <div className="bg-card border border-border rounded-xl sm:rounded-2xl overflow-hidden card-3d neon-glow h-full hover:scale-105 transition-transform duration-300">
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img 
+                    src={cert.image} 
+                    alt={cert.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <div className="p-3 sm:p-4">
-                  <p className="text-center font-semibold text-sm sm:text-base text-foreground">{cert}</p>
+                <div className="p-3 sm:p-4 bg-gradient-to-br from-primary/10 to-primary/5">
+                  <p className="text-center font-semibold text-sm sm:text-base text-foreground">{cert.name}</p>
                 </div>
               </div>
             </ScrollReveal>
