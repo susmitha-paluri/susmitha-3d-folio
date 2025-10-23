@@ -48,9 +48,9 @@ export const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/10 animate-gradient" />
       
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 py-20 text-center">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20 text-center">
         <div className="animate-float">
-          <div className="w-48 h-48 mx-auto mb-8 rounded-full overflow-hidden border-4 border-primary neon-glow animate-glow-pulse">
+          <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto mb-6 sm:mb-8 rounded-full overflow-hidden border-4 border-primary neon-glow animate-glow-pulse">
             <img
               src={profilePhoto}
               alt="Paluri Susmitha"
@@ -59,15 +59,15 @@ export const HeroSection = () => {
           </div>
         </div>
 
-        <h1 className="text-6xl md:text-8xl font-bold mb-4 gradient-text neon-text">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-3 sm:mb-4 gradient-text neon-text px-2">
           Susmitha Paluri
         </h1>
         
-        <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-4xl mx-auto">
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-muted-foreground mb-6 sm:mb-8 max-w-4xl mx-auto px-4 leading-relaxed">
           Aspiring Security Engineer | Full Stack Developer | Web Developer | Java Developer | AI & Cybersecurity Enthusiast
         </p>
 
-        <div className="flex flex-wrap gap-4 justify-center mb-12">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 px-4">
           <Button
             size="lg"
             onClick={() => scrollToSection("projects")}
@@ -96,7 +96,7 @@ export const HeroSection = () => {
         </div>
 
         {/* Social Links */}
-        <div className="flex gap-6 justify-center mb-16">
+        <div className="flex flex-wrap gap-4 sm:gap-6 justify-center mb-12 sm:mb-16 px-4">
           {socialLinks.map((social, index) => {
             return (
               <a
@@ -104,7 +104,7 @@ export const HeroSection = () => {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-[35px] h-[35px] rounded-lg bg-card border border-border flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-[0_0_20px_rgba(239,68,68,0.6)] hover:border-red-500 overflow-hidden p-1"
+                className="w-10 h-10 sm:w-[35px] sm:h-[35px] rounded-lg bg-card border border-border flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-[0_0_20px_rgba(239,68,68,0.6)] hover:border-red-500 overflow-hidden p-1"
                 aria-label={social.label}
               >
                 {social.type === "image" ? (
@@ -114,7 +114,7 @@ export const HeroSection = () => {
                     className="w-full h-full object-contain"
                   />
                 ) : (
-                  <social.icon className="w-5 h-5" />
+                  <social.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                 )}
               </a>
             );
