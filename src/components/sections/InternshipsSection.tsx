@@ -29,6 +29,16 @@ const internships = [
       "Debugged code and improved efficiency by 40%",
     ],
   },
+  {
+    title: "Cybersecurity Intern",
+    company: "ExcelR Edtech Pvt. Ltd.",
+    period: "June - August 2024",
+    achievements: [
+      "Worked on identifying and mitigating web application vulnerabilities like XSS, SQL Injection, and CSRF",
+      "Conducted security assessments and implemented encryption techniques to secure user data",
+      "Strengthened understanding of network security, ethical hacking, and real-world cybersecurity practices",
+    ],
+  },
 ];
 
 export const InternshipsSection = () => {
