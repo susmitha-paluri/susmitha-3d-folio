@@ -58,7 +58,9 @@ export const Navigation = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-black/80 backdrop-blur-md" : "bg-black/60"
+        isScrolled 
+          ? "bg-[#2c2c2c]/95 dark:bg-black/80 backdrop-blur-md" 
+          : "bg-[#2c2c2c]/80 dark:bg-black/60"
       } border-b border-primary/20 neon-glow`}
     >
       <div className="container mx-auto px-4 sm:px-6">
@@ -89,7 +91,7 @@ export const Navigation = () => {
                   className={`px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg relative ${
                     isActive
                       ? "text-primary neon-text"
-                      : "text-foreground/80 hover:text-foreground"
+                      : "text-white/90 dark:text-foreground/80 hover:text-white dark:hover:text-foreground"
                   }`}
                 >
                   {item.name}
@@ -124,7 +126,7 @@ export const Navigation = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-primary/20 bg-black/95 backdrop-blur-md animate-scale-in">
+          <div className="md:hidden border-t border-primary/20 bg-[#2c2c2c]/95 dark:bg-black/95 backdrop-blur-md animate-scale-in">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => {
                 const section = item.href.substring(1);
@@ -137,7 +139,7 @@ export const Navigation = () => {
                     className={`block w-full text-left px-4 py-3 text-base font-medium rounded-lg transition-all duration-300 ${
                       isActive
                         ? "text-primary bg-primary/10 neon-text"
-                        : "text-foreground/80 hover:text-foreground hover:bg-primary/5"
+                        : "text-white/90 dark:text-foreground/80 hover:text-white dark:hover:text-foreground hover:bg-primary/5"
                     }`}
                   >
                     {item.name}
