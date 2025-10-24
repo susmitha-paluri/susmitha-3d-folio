@@ -12,7 +12,7 @@ import certGenz4 from "@/assets/cert-genz-4.jpeg";
 import certElite1 from "@/assets/cert-elite-1.jpeg";
 import certElite2 from "@/assets/cert-elite-2.jpeg";
 import certElite3 from "@/assets/cert-elite-3.jpeg";
-import certCybersecurity from "@/assets/cert-saviynt.jpeg";
+import certCybersecurity from "@/assets/cert-cybersecurity.jpeg";
 
 const internships = [
   {
