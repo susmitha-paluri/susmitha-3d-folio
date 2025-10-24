@@ -1,5 +1,18 @@
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { Briefcase, TrendingUp } from "lucide-react";
+import { Briefcase, TrendingUp, Award, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useState } from "react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+
+import certFullstackJava from "@/assets/cert-fullstack-java.jpeg";
+import certGenz1 from "@/assets/cert-genz-1.jpeg";
+import certGenz2 from "@/assets/cert-genz-2.jpeg";
+import certGenz3 from "@/assets/cert-genz-3.jpeg";
+import certGenz4 from "@/assets/cert-genz-4.jpeg";
+import certElite1 from "@/assets/cert-elite-1.jpeg";
+import certElite2 from "@/assets/cert-elite-2.jpeg";
+import certElite3 from "@/assets/cert-elite-3.jpeg";
+import certCybersecurity from "@/assets/cert-saviynt.jpeg";
 
 const internships = [
   {
@@ -10,6 +23,7 @@ const internships = [
       "Built REST APIs with Spring Boot & React integration",
       "Improved web performance by 60% through optimized API handling",
     ],
+    certificates: [certFullstackJava],
   },
   {
     title: "Web Developer Intern",
@@ -19,6 +33,7 @@ const internships = [
       "Designed modern responsive web layouts",
       "Enhanced user engagement by 35%",
     ],
+    certificates: [certGenz1, certGenz2, certGenz3, certGenz4],
   },
   {
     title: "Java Developer Intern",
@@ -28,6 +43,7 @@ const internships = [
       "Built Java modules with OOPs principles",
       "Debugged code and improved efficiency by 40%",
     ],
+    certificates: [certElite1, certElite2, certElite3],
   },
   {
     title: "Cybersecurity Intern",
@@ -38,10 +54,38 @@ const internships = [
       "Conducted security assessments and implemented encryption techniques to secure user data",
       "Strengthened understanding of network security, ethical hacking, and real-world cybersecurity practices",
     ],
+    certificates: [certCybersecurity],
   },
 ];
 
 export const InternshipsSection = () => {
+  const [selectedInternship, setSelectedInternship] = useState<number | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const openModal = (index: number) => {
+    setSelectedInternship(index);
+    setCurrentImageIndex(0);
+  };
+
+  const closeModal = () => {
+    setSelectedInternship(null);
+    setCurrentImageIndex(0);
+  };
+
+  const nextImage = () => {
+    if (selectedInternship !== null) {
+      const totalImages = internships[selectedInternship].certificates.length;
+      setCurrentImageIndex((prev) => (prev + 1) % totalImages);
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedInternship !== null) {
+      const totalImages = internships[selectedInternship].certificates.length;
+      setCurrentImageIndex((prev) => (prev - 1 + totalImages) % totalImages);
+    }
+  };
+
   return (
     <section id="internships" className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-gradient-to-b from-primary/5 to-background">
       <div className="container mx-auto max-w-5xl">
@@ -72,7 +116,7 @@ export const InternshipsSection = () => {
                         <p className="text-base sm:text-lg text-muted-foreground mb-1">{internship.company}</p>
                         <p className="text-xs sm:text-sm text-muted-foreground mb-4">{internship.period}</p>
                         
-                        <div className="space-y-2">
+                        <div className="space-y-2 mb-4">
                           {internship.achievements.map((achievement, idx) => (
                             <div key={idx} className="flex items-start gap-2">
                               <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0 mt-0.5" />
@@ -80,6 +124,14 @@ export const InternshipsSection = () => {
                             </div>
                           ))}
                         </div>
+
+                        <Button
+                          onClick={() => openModal(index)}
+                          className="bg-primary/20 text-primary border border-primary/50 hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-[0_0_15px_rgba(239,68,68,0.3)] hover:shadow-[0_0_25px_rgba(239,68,68,0.5)]"
+                        >
+                          <Award className="w-4 h-4 mr-2" />
+                          View Proof
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -88,6 +140,59 @@ export const InternshipsSection = () => {
             ))}
           </div>
         </div>
+
+        {/* Certificate Modal */}
+        <Dialog open={selectedInternship !== null} onOpenChange={closeModal}>
+          <DialogContent className="max-w-4xl bg-background/95 backdrop-blur-xl border-2 border-primary/50 shadow-[0_0_30px_rgba(239,68,68,0.4)] p-0 overflow-hidden">
+            <div className="relative">
+              {/* Close Button */}
+              <button
+                onClick={closeModal}
+                className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm border border-primary/50 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-[0_0_15px_rgba(239,68,68,0.3)] hover:shadow-[0_0_25px_rgba(239,68,68,0.5)]"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {selectedInternship !== null && (
+                <div className="relative">
+                  {/* Certificate Image */}
+                  <div className="p-8 flex items-center justify-center min-h-[400px] sm:min-h-[500px]">
+                    <img
+                      src={internships[selectedInternship].certificates[currentImageIndex]}
+                      alt={`${internships[selectedInternship].title} Certificate ${currentImageIndex + 1}`}
+                      className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-[0_0_30px_rgba(239,68,68,0.3)]"
+                    />
+                  </div>
+
+                  {/* Navigation Arrows */}
+                  {internships[selectedInternship].certificates.length > 1 && (
+                    <>
+                      <button
+                        onClick={prevImage}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm border border-primary/50 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-[0_0_15px_rgba(239,68,68,0.3)] hover:shadow-[0_0_25px_rgba(239,68,68,0.5)]"
+                      >
+                        <ChevronLeft className="w-6 h-6" />
+                      </button>
+                      <button
+                        onClick={nextImage}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm border border-primary/50 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-[0_0_15px_rgba(239,68,68,0.3)] hover:shadow-[0_0_25px_rgba(239,68,68,0.5)]"
+                      >
+                        <ChevronRight className="w-6 h-6" />
+                      </button>
+                    </>
+                  )}
+
+                  {/* Image Counter */}
+                  {internships[selectedInternship].certificates.length > 1 && (
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-background/80 backdrop-blur-sm border border-primary/50 text-sm text-foreground shadow-[0_0_15px_rgba(239,68,68,0.3)]">
+                      {currentImageIndex + 1} / {internships[selectedInternship].certificates.length}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </section>
   );
