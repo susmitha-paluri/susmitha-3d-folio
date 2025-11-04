@@ -9,15 +9,13 @@ import certCloud2 from "@/assets/cert-cloud-2.jpeg";
 import certCloud3 from "@/assets/cert-cloud-3.jpeg";
 import certCip from "@/assets/cert-cip.jpeg";
 import certSaviynt from "@/assets/cert-saviynt.jpeg";
-import certFullstackJava from "@/assets/cert-fullstack-java.jpeg";
-import certCybersecurity from "@/assets/cert-cybersecurity.jpeg";
-import certElite1 from "@/assets/cert-elite-1.jpeg";
-import certElite2 from "@/assets/cert-elite-2.jpeg";
-import certElite3 from "@/assets/cert-elite-3.jpeg";
-import certGenz1 from "@/assets/cert-genz-1.jpeg";
-import certGenz2 from "@/assets/cert-genz-2.jpeg";
-import certGenz3 from "@/assets/cert-genz-3.jpeg";
-import certGenz4 from "@/assets/cert-genz-4.jpeg";
+import certTechMahindra from "@/assets/cert-tech-mahindra.jpeg";
+import certGfg from "@/assets/cert-gfg.jpeg";
+import certPowerBi from "@/assets/cert-powerbi.jpeg";
+import certForage from "@/assets/cert-forage.jpeg";
+import certGenAi1 from "@/assets/cert-genai-1.jpeg";
+import certGenAi2 from "@/assets/cert-genai-2.jpeg";
+import certGenAi3 from "@/assets/cert-genai-3.jpeg";
 
 // Individual certificates
 const individualCertificates = [{
@@ -31,16 +29,16 @@ const individualCertificates = [{
   image: certSaviynt
 }, {
   name: "Cybersecurity Course Completion – Tech Mahindra",
-  image: certCybersecurity
+  image: certTechMahindra
 }, {
   name: "GeeksforGeeks DSA 160 Days Completion",
-  image: certElite2
+  image: certGfg
 }, {
   name: "Power BI Workshop – Tech Tip 24",
-  image: certElite3
+  image: certPowerBi
 }, {
   name: "Cybersecurity Simulation – Forage",
-  image: certFullstackJava
+  image: certForage
 }];
 
 // Grouped certificates
@@ -59,19 +57,16 @@ const groupedCertificates = [{
   }]
 }, {
   title: "Google Generative AI",
-  previewImage: certGenz1,
+  previewImage: certGenAi1,
   certificates: [{
-    name: "Generative AI Fundamentals",
-    image: certGenz1
+    name: "Gen AI Agents: Transform Your Organization",
+    image: certGenAi1
   }, {
-    name: "Advanced GenAI Applications",
-    image: certGenz2
+    name: "Gen AI Apps: Transform Your Work",
+    image: certGenAi2
   }, {
-    name: "GenAI for Business",
-    image: certGenz3
-  }, {
-    name: "GenAI Ethics & Best Practices",
-    image: certGenz4
+    name: "Gen AI: Navigate the Landscape",
+    image: certGenAi3
   }]
 }];
 const IndividualCertificate = ({
