@@ -143,54 +143,53 @@ export const InternshipsSection = () => {
 
         {/* Certificate Modal */}
         <Dialog open={selectedInternship !== null} onOpenChange={closeModal}>
-          <DialogContent className="max-w-4xl bg-background/95 backdrop-blur-xl border-2 border-primary/50 shadow-[0_0_30px_rgba(239,68,68,0.4)] p-0 overflow-hidden">
-            <div className="relative">
-              {/* Close Button */}
-              <button
-                onClick={closeModal}
-                className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm border border-primary/50 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-[0_0_15px_rgba(239,68,68,0.3)] hover:shadow-[0_0_25px_rgba(239,68,68,0.5)]"
-              >
-                <X className="w-5 h-5" />
-              </button>
+          <DialogContent className="max-w-4xl w-[95vw] max-h-[75vh] overflow-y-auto bg-background/95 backdrop-blur-xl border-2 border-primary/50 shadow-[0_0_30px_rgba(239,68,68,0.4)] p-0">
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 z-50 text-primary hover:text-primary/80 transition-colors bg-background/80 rounded-full p-2"
+            >
+              <X className="w-6 h-6" />
+            </button>
 
-              {selectedInternship !== null && (
-                <div className="relative">
-                  {/* Certificate Image */}
-                  <div className="p-8 flex items-center justify-center min-h-[400px] sm:min-h-[500px]">
-                    <img
-                      src={internships[selectedInternship].certificates[currentImageIndex]}
-                      alt={`${internships[selectedInternship].title} Certificate ${currentImageIndex + 1}`}
-                      className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-[0_0_30px_rgba(239,68,68,0.3)]"
-                    />
-                  </div>
-
-                  {/* Navigation Arrows */}
-                  {internships[selectedInternship].certificates.length > 1 && (
-                    <>
-                      <button
-                        onClick={prevImage}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm border border-primary/50 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-[0_0_15px_rgba(239,68,68,0.3)] hover:shadow-[0_0_25px_rgba(239,68,68,0.5)]"
-                      >
-                        <ChevronLeft className="w-6 h-6" />
-                      </button>
-                      <button
-                        onClick={nextImage}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm border border-primary/50 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-[0_0_15px_rgba(239,68,68,0.3)] hover:shadow-[0_0_25px_rgba(239,68,68,0.5)]"
-                      >
-                        <ChevronRight className="w-6 h-6" />
-                      </button>
-                    </>
-                  )}
-
-                  {/* Image Counter */}
-                  {internships[selectedInternship].certificates.length > 1 && (
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-background/80 backdrop-blur-sm border border-primary/50 text-sm text-foreground shadow-[0_0_15px_rgba(239,68,68,0.3)]">
-                      {currentImageIndex + 1} / {internships[selectedInternship].certificates.length}
-                    </div>
-                  )}
+            {selectedInternship !== null && (
+              <div className="relative p-8">
+                {/* Certificate Image */}
+                <div className="flex items-center justify-center">
+                  <img
+                    src={internships[selectedInternship].certificates[currentImageIndex]}
+                    alt={`${internships[selectedInternship].title} Certificate ${currentImageIndex + 1}`}
+                    className="w-auto max-w-full h-auto rounded-lg shadow-[0_0_30px_rgba(239,68,68,0.3)] mx-auto"
+                  />
                 </div>
-              )}
-            </div>
+
+                {/* Navigation Arrows */}
+                {internships[selectedInternship].certificates.length > 1 && (
+                  <>
+                    <button
+                      onClick={prevImage}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-primary/80 hover:bg-primary text-primary-foreground p-3 rounded-full shadow-[0_0_20px_rgba(239,68,68,0.5)] transition-all duration-300"
+                    >
+                      <ChevronLeft className="w-6 h-6" />
+                    </button>
+                    <button
+                      onClick={nextImage}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-primary/80 hover:bg-primary text-primary-foreground p-3 rounded-full shadow-[0_0_20px_rgba(239,68,68,0.5)] transition-all duration-300"
+                    >
+                      <ChevronRight className="w-6 h-6" />
+                    </button>
+                  </>
+                )}
+
+                {/* Image Counter */}
+                {internships[selectedInternship].certificates.length > 1 && (
+                  <div className="text-center mt-4">
+                    <span className="text-sm text-muted-foreground">
+                      {currentImageIndex + 1} / {internships[selectedInternship].certificates.length}
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
           </DialogContent>
         </Dialog>
       </div>

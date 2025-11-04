@@ -4,9 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useState } from "react";
 import certIot from "@/assets/cert-iot.jpeg";
-import certCloud1 from "@/assets/cert-cloud-1.jpeg";
-import certCloud2 from "@/assets/cert-cloud-2.jpeg";
-import certCloud3 from "@/assets/cert-cloud-3.jpeg";
+import certCloud from "@/assets/cert-cloud.jpeg";
 import certCip from "@/assets/cert-cip.jpeg";
 import certSaviynt from "@/assets/cert-saviynt.jpeg";
 import certTechMahindra from "@/assets/cert-tech-mahindra.jpeg";
@@ -39,23 +37,13 @@ const individualCertificates = [{
 }, {
   name: "Cybersecurity Simulation – Forage",
   image: certForage
+}, {
+  name: "Google Cloud Computing Foundations Certificate",
+  image: certCloud
 }];
 
 // Grouped certificates
 const groupedCertificates = [{
-  title: "Google Cloud Computing",
-  previewImage: certCloud1,
-  certificates: [{
-    name: "Google Cloud Computing Foundations",
-    image: certCloud1
-  }, {
-    name: "Google Cloud AI & Gen AI",
-    image: certCloud2
-  }, {
-    name: "Google Cloud Professional ML Engineer",
-    image: certCloud3
-  }]
-}, {
   title: "Google Generative AI",
   previewImage: certGenAi1,
   certificates: [{
@@ -93,12 +81,12 @@ const IndividualCertificate = ({
       </ScrollReveal>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-4xl w-[95vw] bg-background/95 backdrop-blur-lg border-2 border-primary shadow-[0_0_30px_rgba(239,68,68,0.5)] p-0">
-          <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 z-50 text-primary hover:text-primary/80 transition-colors">
+        <DialogContent className="max-w-4xl w-[95vw] max-h-[75vh] overflow-y-auto bg-background/95 backdrop-blur-lg border-2 border-primary shadow-[0_0_30px_rgba(239,68,68,0.5)] p-0">
+          <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 z-50 text-primary hover:text-primary/80 transition-colors bg-background/80 rounded-full p-2">
             <X className="w-6 h-6" />
           </button>
-          <div className="p-4">
-            <img src={cert.image} alt={cert.name} className="w-full h-auto rounded-lg" />
+          <div className="p-8 flex flex-col items-center">
+            <img src={cert.image} alt={cert.name} className="w-auto max-w-full h-auto rounded-lg mx-auto" />
             <p className="text-center mt-4 text-lg font-semibold text-foreground glow-text">
               {cert.name}
             </p>
@@ -141,13 +129,15 @@ const GroupedCertificate = ({
       </ScrollReveal>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-4xl w-[95vw] bg-background/95 backdrop-blur-lg border-2 border-primary shadow-[0_0_30px_rgba(239,68,68,0.5)] p-0">
-          <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 z-50 text-primary hover:text-primary/80 transition-colors">
+        <DialogContent className="max-w-4xl w-[95vw] max-h-[75vh] overflow-y-auto bg-background/95 backdrop-blur-lg border-2 border-primary shadow-[0_0_30px_rgba(239,68,68,0.5)] p-0">
+          <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 z-50 text-primary hover:text-primary/80 transition-colors bg-background/80 rounded-full p-2">
             <X className="w-6 h-6" />
           </button>
           
-          <div className="relative p-4">
-            <img src={group.certificates[currentIndex].image} alt={group.certificates[currentIndex].name} className="w-full h-auto rounded-lg" />
+          <div className="relative p-8">
+            <div className="flex justify-center">
+              <img src={group.certificates[currentIndex].image} alt={group.certificates[currentIndex].name} className="w-auto max-w-full h-auto rounded-lg mx-auto" />
+            </div>
             
             {group.certificates.length > 1 && <>
                 <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 bg-primary/80 hover:bg-primary text-primary-foreground p-3 rounded-full shadow-[0_0_20px_rgba(239,68,68,0.5)] transition-all duration-300">
@@ -194,13 +184,21 @@ export const CertificatesSection = () => {
           </div>
         </div>
 
-        {/* Row 3: Last Individual Certificate + Grouped Certificates */}
+        {/* Row 3: Last 3 Individual Certificates */}
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-            {individualCertificates.slice(6, 7).map((cert, index) => <IndividualCertificate key={index + 6} cert={cert} />)}
-            {groupedCertificates.map((group, index) => <GroupedCertificate key={index} group={group} />)}
+            {individualCertificates.slice(6, 9).map((cert, index) => <IndividualCertificate key={index + 6} cert={cert} />)}
           </div>
         </div>
+
+        {/* Row 4: Grouped Certificate */}
+        {groupedCertificates.length > 0 && (
+          <div className="mt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+              {groupedCertificates.map((group, index) => <GroupedCertificate key={index} group={group} />)}
+            </div>
+          </div>
+        )}
       </div>
     </section>;
 };
