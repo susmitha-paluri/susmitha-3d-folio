@@ -182,16 +182,23 @@ export const CertificatesSection = () => {
           </h2>
         </ScrollReveal>
 
-        {/* Individual Certificates */}
-        <div className="mb-12">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-            {individualCertificates.map((cert, index) => <IndividualCertificate key={index} cert={cert} />)}
+        {/* Row 1: First 3 Individual Certificates */}
+        <div className="mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+            {individualCertificates.slice(0, 3).map((cert, index) => <IndividualCertificate key={index} cert={cert} />)}
           </div>
         </div>
 
-        {/* Grouped Certificates */}
+        {/* Row 2: Next 3 Individual Certificates */}
+        <div className="mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+            {individualCertificates.slice(3, 6).map((cert, index) => <IndividualCertificate key={index + 3} cert={cert} />)}
+          </div>
+        </div>
+
+        {/* Row 3: Grouped Certificates */}
         <div>
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
             {groupedCertificates.map((group, index) => <GroupedCertificate key={index} group={group} />)}
           </div>
         </div>
