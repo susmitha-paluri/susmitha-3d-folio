@@ -24,25 +24,28 @@ const individualCertificates = [{
   name: "Introduction to Internet of Things",
   image: certIot
 }, {
-  name: "Full Stack Java Development",
-  image: certFullstackJava
-}, {
-  name: "Cybersecurity Fundamentals",
-  image: certCybersecurity
-}, {
-  name: "Critical Infrastructure Protection",
+  name: "Introduction to Critical Infrastructure Protection",
   image: certCip
 }, {
-  name: "Saviynt Identity Security for AI Age",
+  name: "Saviynt Security for AI Age",
   image: certSaviynt
 }, {
-  name: "Elite Tech Java Development",
-  image: certElite1
+  name: "Cybersecurity Course Completion – Tech Mahindra",
+  image: certCybersecurity
+}, {
+  name: "GeeksforGeeks DSA 160 Days Completion",
+  image: certElite2
+}, {
+  name: "Power BI Workshop – Tech Tip 24",
+  image: certElite3
+}, {
+  name: "Cybersecurity Simulation – Forage",
+  image: certFullstackJava
 }];
 
 // Grouped certificates
 const groupedCertificates = [{
-  title: "Google Cloud Computing Series",
+  title: "Google Cloud Computing",
   previewImage: certCloud1,
   certificates: [{
     name: "Google Cloud Computing Foundations",
@@ -55,7 +58,7 @@ const groupedCertificates = [{
     image: certCloud3
   }]
 }, {
-  title: "Generative AI Specialization",
+  title: "Google Generative AI",
   previewImage: certGenz1,
   certificates: [{
     name: "Generative AI Fundamentals",
@@ -196,9 +199,10 @@ export const CertificatesSection = () => {
           </div>
         </div>
 
-        {/* Row 3: Grouped Certificates */}
+        {/* Row 3: Last Individual Certificate + Grouped Certificates */}
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+            {individualCertificates.slice(6, 7).map((cert, index) => <IndividualCertificate key={index + 6} cert={cert} />)}
             {groupedCertificates.map((group, index) => <GroupedCertificate key={index} group={group} />)}
           </div>
         </div>
