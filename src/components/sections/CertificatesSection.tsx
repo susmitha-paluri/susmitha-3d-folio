@@ -79,15 +79,15 @@ const IndividualCertificate = ({
   const [isOpen, setIsOpen] = useState(false);
   return <>
       <ScrollReveal>
-        <div className="bg-card border border-border rounded-xl overflow-hidden card-3d neon-glow group">
-          <div className="aspect-[4/3] overflow-hidden">
-            <img src={cert.image} alt={cert.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+        <div className="bg-card border border-border rounded-xl overflow-hidden card-3d neon-glow group w-full max-w-[250px]">
+          <div className="aspect-[4/3] overflow-hidden rounded-t-xl">
+            <img src={cert.image} alt={cert.name} className="w-full h-auto object-cover group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(239,68,68,0.6)] transition-all duration-500" />
           </div>
-          <div className="p-4 bg-gradient-to-br from-primary/10 to-primary/5">
-            <h3 className="text-center font-semibold text-sm mb-3 text-foreground glow-text">
+          <div className="p-3 bg-gradient-to-br from-primary/10 to-primary/5">
+            <h3 className="text-center font-semibold text-xs mb-2 text-foreground glow-text">
               {cert.name}
             </h3>
-            <Button onClick={() => setIsOpen(true)} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground hover:shadow-[0_0_20px_rgba(239,68,68,0.6)] transition-all duration-300">
+            <Button onClick={() => setIsOpen(true)} className="w-full text-xs py-2 bg-primary hover:bg-primary/90 text-primary-foreground hover:shadow-[0_0_20px_rgba(239,68,68,0.6)] transition-all duration-300">
               View Full Certificate
             </Button>
           </div>
@@ -124,18 +124,18 @@ const GroupedCertificate = ({
   };
   return <>
       <ScrollReveal>
-        <div className="bg-card border border-border rounded-xl overflow-hidden card-3d neon-glow group">
-          <div className="aspect-[4/3] overflow-hidden">
-            <img src={group.previewImage} alt={group.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+        <div className="bg-card border border-border rounded-xl overflow-hidden card-3d neon-glow group w-full max-w-[250px]">
+          <div className="aspect-[4/3] overflow-hidden rounded-t-xl">
+            <img src={group.previewImage} alt={group.title} className="w-full h-auto object-cover group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(239,68,68,0.6)] transition-all duration-500" />
           </div>
-          <div className="p-4 bg-gradient-to-br from-primary/10 to-primary/5">
-            <h3 className="text-center font-semibold text-sm mb-2 text-foreground glow-text">
+          <div className="p-3 bg-gradient-to-br from-primary/10 to-primary/5">
+            <h3 className="text-center font-semibold text-xs mb-1 text-foreground glow-text">
               {group.title}
             </h3>
-            <p className="text-center text-xs text-muted-foreground mb-3">
+            <p className="text-center text-xs text-muted-foreground mb-2">
               {group.certificates.length} Certificates
             </p>
-            <Button onClick={() => setIsOpen(true)} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground hover:shadow-[0_0_20px_rgba(239,68,68,0.6)] transition-all duration-300">
+            <Button onClick={() => setIsOpen(true)} className="w-full text-xs py-2 bg-primary hover:bg-primary/90 text-primary-foreground hover:shadow-[0_0_20px_rgba(239,68,68,0.6)] transition-all duration-300">
               View All Certificates
             </Button>
           </div>
@@ -184,20 +184,14 @@ export const CertificatesSection = () => {
 
         {/* Individual Certificates */}
         <div className="mb-12">
-          <ScrollReveal>
-            
-          </ScrollReveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
             {individualCertificates.map((cert, index) => <IndividualCertificate key={index} cert={cert} />)}
           </div>
         </div>
 
         {/* Grouped Certificates */}
         <div>
-          <ScrollReveal>
-            
-          </ScrollReveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
             {groupedCertificates.map((group, index) => <GroupedCertificate key={index} group={group} />)}
           </div>
         </div>
