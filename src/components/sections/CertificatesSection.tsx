@@ -2,7 +2,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import certIot from "@/assets/cert-iot.jpeg";
 import certCloud from "@/assets/cert-cloud.jpeg";
 import certCip from "@/assets/cert-cip.jpeg";
@@ -14,6 +14,13 @@ import certForage from "@/assets/cert-forage.jpeg";
 import certGenAi1 from "@/assets/cert-genai-1.jpeg";
 import certGenAi2 from "@/assets/cert-genai-2.jpeg";
 import certGenAi3 from "@/assets/cert-genai-3.jpeg";
+import certGenAi4 from "@/assets/cert-genai-4.jpeg";
+import certGenAi5 from "@/assets/cert-genai-5.jpeg";
+import certGenAi6 from "@/assets/cert-genai-6.jpeg";
+import certGenAi7 from "@/assets/cert-genai-7.jpeg";
+import certGenAi8 from "@/assets/cert-genai-8.jpeg";
+import certGenAi9 from "@/assets/cert-genai-9.jpeg";
+import certGenAi10 from "@/assets/cert-genai-10.jpeg";
 
 // Individual certificates
 const individualCertificates = [{
@@ -55,6 +62,27 @@ const groupedCertificates = [{
   }, {
     name: "Gen AI: Navigate the Landscape",
     image: certGenAi3
+  }, {
+    name: "Gen AI: Unlock Foundational Concepts",
+    image: certGenAi4
+  }, {
+    name: "Gen AI: Beyond the Chatbot",
+    image: certGenAi5
+  }, {
+    name: "Applying AI Principles with Google Cloud",
+    image: certGenAi6
+  }, {
+    name: "Prompt Design in Vertex AI",
+    image: certGenAi7
+  }, {
+    name: "Introduction to Responsible AI",
+    image: certGenAi8
+  }, {
+    name: "Introduction to Large Language Models",
+    image: certGenAi9
+  }, {
+    name: "Introduction to Generative AI",
+    image: certGenAi10
   }]
 }];
 const IndividualCertificate = ({
@@ -63,6 +91,13 @@ const IndividualCertificate = ({
   cert: typeof individualCertificates[0];
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  
+  // Preload image for instant popup opening
+  useEffect(() => {
+    const img = new Image();
+    img.src = cert.image;
+  }, [cert.image]);
+  
   return <>
       <ScrollReveal>
         <div className="bg-card border border-border rounded-xl overflow-hidden card-3d neon-glow group w-full max-w-[250px]">
@@ -82,12 +117,12 @@ const IndividualCertificate = ({
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="max-w-4xl w-[95vw] max-h-[75vh] overflow-y-auto bg-background/95 backdrop-blur-lg border-2 border-primary shadow-[0_0_30px_rgba(239,68,68,0.5)] p-0">
-          <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 z-50 text-primary hover:text-primary/80 transition-colors bg-background/80 rounded-full p-2">
+          <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 z-50 text-primary hover:text-primary/80 transition-colors bg-background/80 rounded-full p-2 hover:shadow-[0_0_15px_rgba(239,68,68,0.5)]">
             <X className="w-6 h-6" />
           </button>
-          <div className="p-8 flex flex-col items-center">
-            <img src={cert.image} alt={cert.name} className="w-auto max-w-full h-auto rounded-lg mx-auto" />
-            <p className="text-center mt-4 text-lg font-semibold text-foreground glow-text">
+          <div className="p-4 sm:p-8 flex flex-col items-center">
+            <img src={cert.image} alt={cert.name} className="w-auto max-w-full max-h-[70vh] h-auto rounded-lg mx-auto object-contain" />
+            <p className="text-center mt-4 text-base sm:text-lg font-semibold text-foreground glow-text">
               {cert.name}
             </p>
           </div>
@@ -102,6 +137,15 @@ const GroupedCertificate = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  
+  // Preload all certificate images for instant navigation
+  useEffect(() => {
+    group.certificates.forEach(cert => {
+      const img = new Image();
+      img.src = cert.image;
+    });
+  }, [group.certificates]);
+  
   const nextImage = () => {
     setCurrentIndex(prev => (prev + 1) % group.certificates.length);
   };
@@ -130,29 +174,33 @@ const GroupedCertificate = ({
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="max-w-4xl w-[95vw] max-h-[75vh] overflow-y-auto bg-background/95 backdrop-blur-lg border-2 border-primary shadow-[0_0_30px_rgba(239,68,68,0.5)] p-0">
-          <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 z-50 text-primary hover:text-primary/80 transition-colors bg-background/80 rounded-full p-2">
+          <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 z-50 text-primary hover:text-primary/80 transition-colors bg-background/80 rounded-full p-2 hover:shadow-[0_0_15px_rgba(239,68,68,0.5)]">
             <X className="w-6 h-6" />
           </button>
           
-          <div className="relative p-8">
+          <div className="relative p-4 sm:p-8">
             <div className="flex justify-center">
-              <img src={group.certificates[currentIndex].image} alt={group.certificates[currentIndex].name} className="w-auto max-w-full h-auto rounded-lg mx-auto" />
+              <img 
+                src={group.certificates[currentIndex].image} 
+                alt={group.certificates[currentIndex].name} 
+                className="w-auto max-w-full max-h-[70vh] h-auto rounded-lg mx-auto object-contain" 
+              />
             </div>
             
             {group.certificates.length > 1 && <>
-                <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 bg-primary/80 hover:bg-primary text-primary-foreground p-3 rounded-full shadow-[0_0_20px_rgba(239,68,68,0.5)] transition-all duration-300">
-                  <ChevronLeft className="w-6 h-6" />
+                <button onClick={prevImage} className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-primary/80 hover:bg-primary text-primary-foreground p-2 sm:p-3 rounded-full shadow-[0_0_20px_rgba(239,68,68,0.5)] transition-all duration-300">
+                  <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
-                <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 bg-primary/80 hover:bg-primary text-primary-foreground p-3 rounded-full shadow-[0_0_20px_rgba(239,68,68,0.5)] transition-all duration-300">
-                  <ChevronRight className="w-6 h-6" />
+                <button onClick={nextImage} className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-primary/80 hover:bg-primary text-primary-foreground p-2 sm:p-3 rounded-full shadow-[0_0_20px_rgba(239,68,68,0.5)] transition-all duration-300">
+                  <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
               </>}
 
             <div className="text-center mt-4">
-              <p className="text-lg font-semibold text-foreground glow-text">
+              <p className="text-base sm:text-lg font-semibold text-foreground glow-text">
                 {group.certificates[currentIndex].name}
               </p>
-              <p className="text-sm text-muted-foreground mt-1">
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">
                 {currentIndex + 1} / {group.certificates.length}
               </p>
             </div>

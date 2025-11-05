@@ -1,6 +1,6 @@
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Briefcase, TrendingUp, Award, ChevronLeft, ChevronRight, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
@@ -61,6 +61,16 @@ const internships = [
 export const InternshipsSection = () => {
   const [selectedInternship, setSelectedInternship] = useState<number | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Preload all internship certificate images for instant popup opening
+  useEffect(() => {
+    internships.forEach(internship => {
+      internship.certificates.forEach(certSrc => {
+        const img = new Image();
+        img.src = certSrc;
+      });
+    });
+  }, []);
 
   const openModal = (index: number) => {
     setSelectedInternship(index);
@@ -146,19 +156,19 @@ export const InternshipsSection = () => {
           <DialogContent className="max-w-4xl w-[95vw] max-h-[75vh] overflow-y-auto bg-background/95 backdrop-blur-xl border-2 border-primary/50 shadow-[0_0_30px_rgba(239,68,68,0.4)] p-0">
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 z-50 text-primary hover:text-primary/80 transition-colors bg-background/80 rounded-full p-2"
+              className="absolute top-4 right-4 z-50 text-primary hover:text-primary/80 transition-colors bg-background/80 rounded-full p-2 hover:shadow-[0_0_15px_rgba(239,68,68,0.5)]"
             >
               <X className="w-6 h-6" />
             </button>
 
             {selectedInternship !== null && (
-              <div className="relative p-8">
+              <div className="relative p-4 sm:p-8">
                 {/* Certificate Image */}
                 <div className="flex items-center justify-center">
                   <img
                     src={internships[selectedInternship].certificates[currentImageIndex]}
                     alt={`${internships[selectedInternship].title} Certificate ${currentImageIndex + 1}`}
-                    className="w-auto max-w-full h-auto rounded-lg shadow-[0_0_30px_rgba(239,68,68,0.3)] mx-auto"
+                    className="w-auto max-w-full max-h-[70vh] h-auto rounded-lg shadow-[0_0_30px_rgba(239,68,68,0.3)] mx-auto object-contain"
                   />
                 </div>
 
@@ -167,15 +177,15 @@ export const InternshipsSection = () => {
                   <>
                     <button
                       onClick={prevImage}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-primary/80 hover:bg-primary text-primary-foreground p-3 rounded-full shadow-[0_0_20px_rgba(239,68,68,0.5)] transition-all duration-300"
+                      className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-primary/80 hover:bg-primary text-primary-foreground p-2 sm:p-3 rounded-full shadow-[0_0_20px_rgba(239,68,68,0.5)] transition-all duration-300"
                     >
-                      <ChevronLeft className="w-6 h-6" />
+                      <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
                     </button>
                     <button
                       onClick={nextImage}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-primary/80 hover:bg-primary text-primary-foreground p-3 rounded-full shadow-[0_0_20px_rgba(239,68,68,0.5)] transition-all duration-300"
+                      className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-primary/80 hover:bg-primary text-primary-foreground p-2 sm:p-3 rounded-full shadow-[0_0_20px_rgba(239,68,68,0.5)] transition-all duration-300"
                     >
-                      <ChevronRight className="w-6 h-6" />
+                      <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
                     </button>
                   </>
                 )}
@@ -183,7 +193,7 @@ export const InternshipsSection = () => {
                 {/* Image Counter */}
                 {internships[selectedInternship].certificates.length > 1 && (
                   <div className="text-center mt-4">
-                    <span className="text-sm text-muted-foreground">
+                    <span className="text-xs sm:text-sm text-muted-foreground">
                       {currentImageIndex + 1} / {internships[selectedInternship].certificates.length}
                     </span>
                   </div>
