@@ -218,35 +218,27 @@ export const CertificatesSection = () => {
           </h2>
         </ScrollReveal>
 
-        {/* Row 1: First 3 Individual Certificates */}
+        {/* Row 1: First 3 Certificates */}
         <div className="mb-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
             {individualCertificates.slice(0, 3).map((cert, index) => <IndividualCertificate key={index} cert={cert} />)}
           </div>
         </div>
 
-        {/* Row 2: Next 3 Individual Certificates */}
+        {/* Row 2: Next 3 Certificates */}
         <div className="mb-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
             {individualCertificates.slice(3, 6).map((cert, index) => <IndividualCertificate key={index + 3} cert={cert} />)}
           </div>
         </div>
 
-        {/* Row 3: Last 3 Individual Certificates */}
+        {/* Row 3: Last 2 Individual + Grouped Certificate */}
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-            {individualCertificates.slice(6, 9).map((cert, index) => <IndividualCertificate key={index + 6} cert={cert} />)}
+            {individualCertificates.slice(6, 8).map((cert, index) => <IndividualCertificate key={index + 6} cert={cert} />)}
+            {groupedCertificates.map((group, index) => <GroupedCertificate key={`group-${index}`} group={group} />)}
           </div>
         </div>
-
-        {/* Row 4: Grouped Certificate */}
-        {groupedCertificates.length > 0 && (
-          <div className="mt-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-              {groupedCertificates.map((group, index) => <GroupedCertificate key={index} group={group} />)}
-            </div>
-          </div>
-        )}
       </div>
     </section>;
 };
