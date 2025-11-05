@@ -92,17 +92,11 @@ const IndividualCertificate = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   
-  // Preload image for instant popup opening
-  useEffect(() => {
-    const img = new Image();
-    img.src = cert.image;
-  }, [cert.image]);
-  
   return <>
       <ScrollReveal>
         <div className="bg-card border border-border rounded-xl overflow-hidden card-3d neon-glow group w-full max-w-[250px]">
           <div className="aspect-[4/3] overflow-hidden rounded-t-xl">
-            <img src={cert.image} alt={cert.name} className="w-full h-auto object-cover group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(239,68,68,0.6)] transition-all duration-500" />
+            <img src={cert.image} alt={cert.name} loading="eager" decoding="async" className="w-full h-auto object-cover group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(239,68,68,0.6)] transition-all duration-500" />
           </div>
           <div className="p-3 bg-gradient-to-br from-primary/10 to-primary/5">
             <h3 className="text-center font-semibold text-xs mb-2 text-foreground glow-text">
@@ -115,19 +109,21 @@ const IndividualCertificate = ({
         </div>
       </ScrollReveal>
 
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-4xl w-[95vw] max-h-[75vh] overflow-y-auto bg-background/95 backdrop-blur-lg border-2 border-primary shadow-[0_0_30px_rgba(239,68,68,0.5)] p-0">
-          <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 z-50 text-primary hover:text-primary/80 transition-colors bg-background/80 rounded-full p-2 hover:shadow-[0_0_15px_rgba(239,68,68,0.5)]">
-            <X className="w-6 h-6" />
-          </button>
-          <div className="p-4 sm:p-8 flex flex-col items-center">
-            <img src={cert.image} alt={cert.name} className="w-auto max-w-full max-h-[70vh] h-auto rounded-lg mx-auto object-contain" />
-            <p className="text-center mt-4 text-base sm:text-lg font-semibold text-foreground glow-text">
-              {cert.name}
-            </p>
-          </div>
-        </DialogContent>
-      </Dialog>
+      {isOpen && (
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          <DialogContent className="max-w-4xl w-[95vw] max-h-[75vh] overflow-y-auto bg-background/95 backdrop-blur-lg border-2 border-primary shadow-[0_0_30px_rgba(239,68,68,0.5)] p-0">
+            <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 z-50 text-primary hover:text-primary/80 transition-colors bg-background/80 rounded-full p-2 hover:shadow-[0_0_15px_rgba(239,68,68,0.5)]">
+              <X className="w-6 h-6" />
+            </button>
+            <div className="p-4 sm:p-8 flex flex-col items-center">
+              <img src={cert.image} alt={cert.name} loading="eager" decoding="sync" className="w-auto max-w-full max-h-[70vh] h-auto rounded-lg mx-auto object-contain" />
+              <p className="text-center mt-4 text-base sm:text-lg font-semibold text-foreground glow-text">
+                {cert.name}
+              </p>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
     </>;
 };
 const GroupedCertificate = ({
@@ -137,14 +133,6 @@ const GroupedCertificate = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  
-  // Preload all certificate images for instant navigation
-  useEffect(() => {
-    group.certificates.forEach(cert => {
-      const img = new Image();
-      img.src = cert.image;
-    });
-  }, [group.certificates]);
   
   const nextImage = () => {
     setCurrentIndex(prev => (prev + 1) % group.certificates.length);
@@ -156,7 +144,7 @@ const GroupedCertificate = ({
       <ScrollReveal>
         <div className="bg-card border border-border rounded-xl overflow-hidden card-3d neon-glow group w-full max-w-[250px]">
           <div className="aspect-[4/3] overflow-hidden rounded-t-xl">
-            <img src={group.previewImage} alt={group.title} className="w-full h-auto object-cover group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(239,68,68,0.6)] transition-all duration-500" />
+            <img src={group.previewImage} alt={group.title} loading="eager" decoding="async" className="w-full h-auto object-cover group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(239,68,68,0.6)] transition-all duration-500" />
           </div>
           <div className="p-3 bg-gradient-to-br from-primary/10 to-primary/5">
             <h3 className="text-center font-semibold text-xs mb-1 text-foreground glow-text">
@@ -172,20 +160,23 @@ const GroupedCertificate = ({
         </div>
       </ScrollReveal>
 
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="max-w-4xl w-[95vw] max-h-[75vh] overflow-y-auto bg-background/95 backdrop-blur-lg border-2 border-primary shadow-[0_0_30px_rgba(239,68,68,0.5)] p-0">
-          <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 z-50 text-primary hover:text-primary/80 transition-colors bg-background/80 rounded-full p-2 hover:shadow-[0_0_15px_rgba(239,68,68,0.5)]">
-            <X className="w-6 h-6" />
-          </button>
-          
-          <div className="relative p-4 sm:p-8">
-            <div className="flex justify-center">
-              <img 
-                src={group.certificates[currentIndex].image} 
-                alt={group.certificates[currentIndex].name} 
-                className="w-auto max-w-full max-h-[70vh] h-auto rounded-lg mx-auto object-contain" 
-              />
-            </div>
+      {isOpen && (
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          <DialogContent className="max-w-4xl w-[95vw] max-h-[75vh] overflow-y-auto bg-background/95 backdrop-blur-lg border-2 border-primary shadow-[0_0_30px_rgba(239,68,68,0.5)] p-0">
+            <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 z-50 text-primary hover:text-primary/80 transition-colors bg-background/80 rounded-full p-2 hover:shadow-[0_0_15px_rgba(239,68,68,0.5)]">
+              <X className="w-6 h-6" />
+            </button>
+            
+            <div className="relative p-4 sm:p-8">
+              <div className="flex justify-center">
+                <img 
+                  src={group.certificates[currentIndex].image} 
+                  alt={group.certificates[currentIndex].name}
+                  loading="eager"
+                  decoding="sync"
+                  className="w-auto max-w-full max-h-[70vh] h-auto rounded-lg mx-auto object-contain" 
+                />
+              </div>
             
             {group.certificates.length > 1 && <>
                 <button onClick={prevImage} className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-primary/80 hover:bg-primary text-primary-foreground p-2 sm:p-3 rounded-full shadow-[0_0_20px_rgba(239,68,68,0.5)] transition-all duration-300">
@@ -207,9 +198,27 @@ const GroupedCertificate = ({
           </div>
         </DialogContent>
       </Dialog>
+      )}
     </>;
 };
 export const CertificatesSection = () => {
+  // Preload ALL images immediately when section mounts
+  useEffect(() => {
+    // Preload all individual certificate images
+    individualCertificates.forEach(cert => {
+      const img = new Image();
+      img.src = cert.image;
+    });
+    
+    // Preload all grouped certificate images
+    groupedCertificates.forEach(group => {
+      group.certificates.forEach(cert => {
+        const img = new Image();
+        img.src = cert.image;
+      });
+    });
+  }, []);
+  
   return <section id="certificates" className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-gradient-to-b from-background to-primary/5">
       <div className="container mx-auto max-w-7xl">
         <ScrollReveal>
